@@ -1,0 +1,44 @@
+# Node.js
+node_modules/
+dist/
+*.log
+.env
+.env.local
+.env.*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# Mac / Linux
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# npm / yarn / pnpm
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Docker
+docker-compose.override.yml
+**/Dockerfile.local
+
+# Redis / Postgres volumes (если вдруг монтируешь)
+redis-data/
+pgdata/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Swagger JSON
+swagger.json
+swagger.yaml
+
+# Jest / Testing
+coverage/
+jest.cache/
