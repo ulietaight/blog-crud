@@ -4,7 +4,7 @@
 
 ## Стек
 
-- Node.js + Fastify
+- Node.js + NestJS
 - TypeScript
 - Prisma + PostgreSQL
 - Redis для счётчиков
