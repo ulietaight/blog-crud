@@ -1,6 +1,8 @@
-import Fastify, { FastifyRequest } from 'fastify';
+import Fastify from 'fastify';
 import cookie from '@fastify/cookie';
 import formbody from '@fastify/formbody';
+import fastifyStatic from '@fastify/static';
+import path from 'path';
 import dotenv from 'dotenv';
 import { prisma } from './prisma';
 import { redis } from './redis';
@@ -14,6 +16,9 @@ const COOLDOWN_DURATION = parseInt(process.env.COOLDOWN_DURATION || '30', 10); /
 const app = Fastify();
 app.register(cookie);
 app.register(formbody);
+app.register(fastifyStatic, {
+  root: path.join(__dirname, '../public'),
+});
 
 // augment request type
 declare module 'fastify' {
@@ -48,7 +53,7 @@ app.post('/login', async (req, reply) => {
   return { id: user.id, username: user.username, role: user.role };
 });
 
-app.get('/rounds', async (req) => {
+app.get('/rounds', async () => {
   const rounds = await prisma.round.findMany({ orderBy: { createdAt: 'desc' } });
   const now = new Date();
   return rounds.map((r) => ({
