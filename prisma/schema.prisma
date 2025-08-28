@@ -1,0 +1,44 @@
+// Prisma schema for The Last of Guss
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  admin
+  nikita
+  survivor
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+  role     Role
+  scores   RoundScore[]
+}
+
+model Round {
+  id        String      @id @default(uuid())
+  createdAt DateTime    @default(now())
+  start     DateTime
+  end       DateTime
+  total     Int         @default(0)
+  scores    RoundScore[]
+}
+
+model RoundScore {
+  id      Int   @id @default(autoincrement())
+  round   Round @relation(fields: [roundId], references: [id])
+  roundId String
+  user    User  @relation(fields: [userId], references: [id])
+  userId  Int
+  taps    Int   @default(0)
+  points  Int   @default(0)
+  @@unique([roundId, userId])
+}

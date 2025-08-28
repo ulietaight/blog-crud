@@ -1,30 +1,28 @@
-# Blog CRUD
+# The Last of Guss
+
+Бэкенд для браузерной игры, где выжившие соревнуются, кто быстрее и больше натапает по виртуальному гусю.
 
 ## Стек
 
-- NestJS (Fastify)
-- TypeORM + PostgreSQL
-- ioredis (кэш)
-- Swagger (API docs)
+- Node.js + Fastify
+- TypeScript
+- Prisma + PostgreSQL
+- Redis для счётчиков
 
----
-
-## Установка
+## Запуск
 
 ```bash
-npm i
+npm install
+npx prisma generate
+npm run build
+node dist/index.js
 ```
 
-## Описание .env для проекта
-```bash
-# PostgreSQL
-POSTGRES_HOST=localhost             # Хост базы данных
-POSTGRES_PORT=5432                  # Порт PostgreSQL
-POSTGRES_USER=postgres              # Логин БД
-POSTGRES_PASSWORD=postgres          # Пароль БД
-POSTGRES_DB=blog                    # Название базы данных
+Переменные окружения:
 
-# Redis
-REDIS_HOST=localhost                # Хост Redis
-REDIS_PORT=6379                     # Порт Redis
+```bash
+DATABASE_URL=postgresql://user:password@localhost:5432/db
+REDIS_URL=redis://localhost:6379
+ROUND_DURATION=60
+COOLDOWN_DURATION=30
 ```
