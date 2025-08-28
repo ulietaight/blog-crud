@@ -1,4 +1,4 @@
-import Fastify, { FastifyRequest } from 'fastify';
+import Fastify from 'fastify';
 import cookie from '@fastify/cookie';
 import formbody from '@fastify/formbody';
 import dotenv from 'dotenv';
@@ -48,7 +48,7 @@ app.post('/login', async (req, reply) => {
   return { id: user.id, username: user.username, role: user.role };
 });
 
-app.get('/rounds', async (req) => {
+app.get('/rounds', async () => {
   const rounds = await prisma.round.findMany({ orderBy: { createdAt: 'desc' } });
   const now = new Date();
   return rounds.map((r) => ({
